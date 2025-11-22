@@ -3,257 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球跨境物流避坑指南 | FedEx Employee Edition</title>
+    <title>Global Logistics Query Engine 2025 | FedEx Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        /* 卡片悬浮特效 */
-        .hover-card { transition: all 0.3s ease; }
-        .hover-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
-        /* 链接样式：红色、加粗、下划线 */
-        a { color: #dc2626; text-decoration: underline; font-weight: bold; }
-        /* 简单的淡入动画 */
-        .fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .card { transition: all 0.2s ease; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
     </style>
 </head>
-<body class="text-gray-800 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen text-slate-800">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <i class="fas fa-box-open text-blue-600 text-xl"></i>
-                <h1 class="text-lg font-bold text-gray-800 tracking-tight">Shipping Guide</h1>
+                <i class="fas fa-globe-asia text-blue-600 text-lg"></i>
+                <h1 class="font-bold text-slate-800 tracking-tight">Logistics Engine</h1>
             </div>
-            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold border border-blue-200">
-                FedEx Pro v3.0
-            </span>
+            <span class="text-xs font-mono text-slate-400">v4.0.25</span>
         </div>
     </nav>
 
     <main class="flex-grow px-4 py-8">
-        <div class="max-w-2xl mx-auto space-y-6">
-            
-            <div class="text-center py-4">
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">跨境发货，拒绝踩坑。</h2>
-                <p class="text-gray-500 text-sm">FedEx 内部避坑数据查询 | 实时汇率估算</p>
+        <div class="max-w-3xl mx-auto">
+
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-1 text-slate-900">跨境物流避坑引擎 (Beta)</h2>
+                <p id="metaLine" class="text-xs text-slate-500 font-mono">Loading system...</p>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover-card">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            <form id="filterForm" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">目的国家 (Destination)</label>
-                        <div class="relative">
-                            <select id="countrySelect" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium text-gray-700">
-                                <option value="">请选择国家...</option>
-                                </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-gray-400">▼</div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">物品类型 (Category)</label>
-                        <div class="relative">
-                            <select id="categorySelect" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium text-gray-700">
-                                <option value="general">📦 普通货物 (General)</option>
-                                <option value="electronics">🔋 电子产品/电池</option>
-                                <option value="food">🥩 食品/药品/化妆品</option>
-                                <option value="luxury">💍 奢侈品/佛牌/古董</option>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Destination</label>
+                        <select id="countrySelect" class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 font-medium">
                             </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-gray-400">▼</div>
-                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Category</label>
+                        <select id="categorySelect" class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 font-medium">
+                            </select>
                     </div>
                 </div>
+                <button type="button" id="resetBtn" class="hidden">Reset</button>
+            </form>
+
+            <div id="resultSection" class="grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-200">
                 
-                <button onclick="searchInfo()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-blue-200 flex justify-center items-center gap-2 group">
-                    <i class="fas fa-search group-hover:scale-110 transition-transform"></i> 
-                    立即查询 / Search
-                </button>
+                <div class="card bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-3 flex items-center gap-1">
+                        <i class="fas fa-gavel"></i> 关税门槛 (De Minimis)
+                    </h3>
+                    <div id="thresholdBody">--</div>
+                </div>
+
+                <div class="card bg-white p-5 rounded-xl border-l-4 border-indigo-500 shadow-sm">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-3 flex items-center gap-1">
+                        <i class="fas fa-truck-plane"></i> 推荐渠道 (Logistics)
+                    </h3>
+                    <div id="channelsBody" class="flex flex-wrap">--</div>
+                </div>
+
+                <div class="card bg-white p-5 rounded-xl border-l-4 border-rose-500 shadow-sm md:col-span-2">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-3 flex items-center gap-1">
+                        <i class="fas fa-calculator"></i> 避坑指南 & 成本模拟 (Analysis)
+                    </h3>
+                    <div id="pitfallBody" class="text-sm text-slate-700 leading-relaxed">--</div>
+                </div>
+
+                <div class="card bg-white p-5 rounded-xl border-l-4 border-slate-400 shadow-sm md:col-span-2">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase mb-3 flex items-center gap-1">
+                        <i class="fas fa-ban"></i> 违禁/敏感品 (Prohibited)
+                    </h3>
+                    <ul id="prohibitedList" class="list-disc list-inside text-sm text-slate-600 columns-1 md:columns-2 gap-4">
+                        --
+                    </ul>
+                </div>
+
             </div>
 
-            <div id="resultArea" class="hidden space-y-4 fade-in">
-                
-                <div class="flex justify-between items-center px-2">
-                    <span class="text-sm font-bold text-gray-400">查询结果</span>
-                    <button onclick="copyResult()" class="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 bg-blue-50 px-3 py-1 rounded-lg transition">
-                        <i class="far fa-copy"></i> 复制结果发给客户
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-emerald-500 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-hand-holding-usd fa-3x text-emerald-500"></i></div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase mb-1">💰 关税起征点 (Tax Threshold)</h3>
-                    <p id="taxInfo" class="text-xl font-bold text-gray-800 tracking-tight">--</p>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-rose-500 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-exclamation-triangle fa-3x text-rose-500"></i></div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase mb-1">⚠️ 高危避坑警告 (Warning)</h3>
-                    <p id="warningInfo" class="text-gray-800 font-medium leading-relaxed">--</p>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-indigo-500 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-shipping-fast fa-3x text-indigo-500"></i></div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase mb-1">🚀 专家建议 & 推荐耗材</h3>
-                    <p id="shippingInfo" class="text-gray-600 leading-relaxed text-sm">--</p>
-                </div>
-
-            </div>
         </div>
     </main>
 
-    <footer class="text-center py-8 text-gray-400 text-xs border-t border-gray-200 mt-8">
-        <p class="mb-1">© 2025 Global Shipping Guide. FedEx Employee Tool.</p>
-        <p>Data updated: Nov 2025</p>
+    <footer class="text-center py-8 text-xs text-slate-400">
+        &copy; <span id="year">2025</span> FedEx Employee Tool. Internal Logic v4.0
     </footer>
 
     <script>
-        // --- 1. 完整数据库 (Database) ---
-        // 这里是你最宝贵的资产。以后想改数据，只改这里。
-        const database = {
-            "US": {
-                name: "🇺🇸 美国 (USA)",
-                threshold: "800 USD (约 5800 RMB)",
-                baseWarning: "严查侵权品牌！任何带 Fake Logo 的衣服鞋子必被扣。肉类制品（含火腿肠/蛋黄月饼）100% 销毁。",
-                recommendation: "首选 FedEx IP (时效最快)。普货 800 刀内免税。💡 省钱技巧：美国路途遥远，建议使用【加厚工业胶带】加固箱角。👉 <a href='https://www.amazon.com' target='_blank'>[点击购买推荐胶带]</a>"
-            },
-            "GB": {
-                name: "🇬🇧 英国 (UK)",
-                threshold: "135 GBP (约 1200 RMB)",
-                baseWarning: "取消了低价值免税额！商业包裹建议如实申报，低申报是重灾区。电子产品严查 VAT。",
-                recommendation: "必须提供收件人税号。建议走 FedEx IE (经济) 性价比高。"
-            },
-            "CA": {
-                name: "🇨🇦 加拿大 (Canada)",
-                threshold: "20 CAD (约 100 RMB) - 极低！",
-                baseWarning: "关税门槛极低，几乎每单必税！保健品（维生素）每次只能寄 90 天用量。",
-                recommendation: "务必提前告知客户会产生关税。建议走 DDP (完税后交货) 渠道，避免客户拒收。"
-            },
-            "AU": {
-                name: "🇦🇺 澳大利亚 (Australia)",
-                threshold: "1000 AUD (约 4700 RMB)",
-                baseWarning: "生物安全检查世界第一严！严禁肉类、种子、土壤、草编织品。木箱必须有熏蒸证明。",
-                recommendation: "FedEx 飞澳洲时效极快。只要不寄吃的，清关很顺畅。"
-            },
-            "EU": {
-                name: "🇪🇺 欧盟通用 (EU General)",
-                threshold: "0 EUR (全额征税)",
-                baseWarning: "必须提供 IOSS 编码。没有 IOSS 会在当地收取高额手续费+增值税。",
-                recommendation: "发货前务必确认收件人配合交税意愿，或使用包税渠道。"
-            },
-            "JP": {
-                name: "🇯🇵 日本 (Japan)",
-                threshold: "10000 JPY (约 470 RMB)",
-                baseWarning: "私人件限制：一次只能寄 24 个化妆品。严禁肉类。香水/指甲油属易燃品难寄。",
-                recommendation: "日本海关对商业快递查验率高，EMS 有时比 FedEx 更容易通关。"
-            },
-            "SG": {
-                name: "🇸🇬 新加坡 (Singapore)",
-                threshold: "400 SGD (约 2100 RMB)",
-                baseWarning: "绝对禁止：口香糖、电子烟、咀嚼烟草。酒类税率极高。",
-                recommendation: "东南亚首选 FedEx IP。OCBC 卡友注意：寄支票建议用文件袋单独封装。"
-            },
-            "TH": {
-                name: "🇹🇭 泰国 (Thailand)",
-                threshold: "1500 THB (约 300 RMB)",
-                baseWarning: "电子烟绝对禁止（哪怕自用也可能坐牢）！佛牌/古董出口需艺术厅审批。",
-                recommendation: "包税专线是王道。FedEx/DHL 这种商业快递 100% 会被征税。"
-            },
-            "VN": {
-                name: "🇻🇳 越南 (Vietnam)",
-                threshold: "1,000,000 VND (约 40 USD)",
-                baseWarning: "海关非常“灵活”，有时会索要额外小费。旧衣服、旧电子产品严格禁止进口。",
-                recommendation: "建议走陆运专线或 EMS。商业快递清关极其繁琐，容易卡关。"
-            },
-            "MY": {
-                name: "🇲🇾 马来西亚 (Malaysia)",
-                threshold: "500 MYR (约 800 RMB)",
-                baseWarning: "严查性用品、宗教冒犯性刊物。所有电子产品建议如实申报。",
-                recommendation: "FedEx/TNT 在马来西亚清关能力较强。"
-            }
-        };
+    /**
+     * Cross-border Logistics Query Engine (Optimized)
+     * 集成：最新五国政策数据 + 自动计算逻辑 + UI渲染
+     * 更新时间：2025-11
+     */
 
-        // --- 2. 物品特殊警告逻辑 ---
-        const categoryRules = {
-            "electronics": "【🔋 电池警告】：必须张贴 UN3481/UN3480 锂电池标签！功率需 <100Wh，否则按危险品(DG)处理。",
-            "food": "【🥩 食品警告】：绝大多数国家禁止私人邮寄肉类/奶制品。美国需 FDA，欧洲需成分表。",
-            "luxury": "【💍 贵重品警告】：务必购买运输保险！佛牌/古董可能涉及文物法，需额外批文。",
-            "general": "" // 普通货物
-        };
+    (function () {
+      // ==========================================
+      // 1. 核心数据库 (The Data Source)
+      // ==========================================
+      const LOGISTICS_DATA = {
+        "Vietnam": {
+          "name": "Vietnam (越南)",
+          "currency": "VND",
+          "exchangeRateUSD": 25450,
+          "customs": {
+            "thresholdDesc": "0 VND (2025新规)",
+            "note": "⚠️ 2025年2月起取消小额免税，全额征收进口税和VAT。",
+            "deMinimisUSD": 0
+          },
+          "taxRules": { "vatRate": 0.10, "dutyRateGeneral": 0.00, "dutyRateSpecial": 0.25 },
+          "codProfile": "消费者习惯开箱验货，拒收率 10-15%。建议提供“签收前查看外观”服务。",
+          "compliance": "发票须含完整CIF价格；化妆品需备案；通信设备需MIC认证。",
+          "prohibited": ["Used Consumer Goods (二手货)", "Cultural Products (敏感内容)", "Firecrackers"],
+          "channels": ["Land Freight (中越陆运)", "J&T Express", "VN Post"]
+        },
+        "Malaysia": {
+          "name": "Malaysia (马来西亚)",
+          "currency": "MYR",
+          "exchangeRateUSD": 4.45,
+          "customs": {
+            "thresholdDesc": "500 MYR (LVG Taxable)",
+            "note": "⚠️ <500 MYR 免关税但收 10% LVG 销售税；>500 MYR 收关税+SST。",
+            "deMinimisUSD": 112
+          },
+          "taxRules": { "vatRate": 0.10, "dutyRateGeneral": 0.00, "dutyRateHigh": 0.15 },
+          "codProfile": "东马 (Sabah/Sarawak) 时效长易拒收；西马电子钱包普及率高，COD 比例下降。",
+          "compliance": "面单需标注 LVG Registration Number；电子产品需 SIRIM 认证。",
+          "prohibited": ["Religious Text on Fabric", "Indecent Printings", "Daggers"],
+          "channels": ["J&T Express", "Shopee Xpress", "GDEX"]
+        },
+        "Indonesia": {
+          "name": "Indonesia (印尼)",
+          "currency": "IDR",
+          "exchangeRateUSD": 15850,
+          "customs": {
+            "thresholdDesc": "3 USD (极低门槛)",
+            "note": "⚠️ >3 USD 即收11% VAT。纺织/箱包/鞋类有 BMTP 保护性高关税。",
+            "deMinimisUSD": 3
+          },
+          "taxRules": { "vatRate": 0.11, "dutyRateGeneral": 0.075, "dutyRateTextile": 0.25 },
+          "codProfile": "极高风险。群岛地形致派送慢，买家易“遗忘”。必须 WhatsApp 确认订单。",
+          "compliance": "必备 NPWP (税号) 或 NIK (身份证)；手机需注册 IMEI；化妆品需 BPOM。",
+          "prohibited": ["Used Clothing (严禁)", "Batik Fabric", "Chinese Medicines"],
+          "channels": ["DDP Special Line (强烈建议)", "J&T Express", "SiCepat"]
+        },
+        "Saudi_Arabia": {
+          "name": "Saudi Arabia (沙特)",
+          "currency": "SAR",
+          "exchangeRateUSD": 3.75,
+          "customs": {
+            "thresholdDesc": "1000 SAR",
+            "note": "⚠️ 15% VAT 无免征额。>1000 SAR 加收关税。",
+            "deMinimisUSD": 266
+          },
+          "taxRules": { "vatRate": 0.15, "dutyRateGeneral": 0.05, "dutyRateHigh": 0.20 },
+          "codProfile": "高风险。家庭地址不清 (需 National Address)，女性收货不便，极其依赖电话联系。",
+          "compliance": "SABER 认证 (电子/玩具)；Made in China 必须物理刻印/强力贴。",
+          "prohibited": ["Alcohol & Pork", "Non-Islamic Religious Items", "Laser Pointers"],
+          "channels": ["Aramex", "SMSA", "iMile"]
+        },
+        "UAE": {
+          "name": "UAE (阿联酋)",
+          "currency": "AED",
+          "exchangeRateUSD": 3.67,
+          "customs": {
+            "thresholdDesc": "300 AED",
+            "note": "5% VAT 普遍征收。门槛相对较高，物流较成熟。",
+            "deMinimisUSD": 81
+          },
+          "taxRules": { "vatRate": 0.05, "dutyRateGeneral": 0.05, "dutyRateHigh": 0.05 },
+          "codProfile": "中风险。外籍人口流动性大，地址变更频繁。",
+          "compliance": "HS Code 需精确到8位；电子产品需 ESMA 认证。",
+          "prohibited": ["Poppy Seeds (严禁)", "Gambling Tools", "Boycotted Goods"],
+          "channels": ["iMile", "Aramex", "Emirates Post"]
+        }
+      };
 
-        // --- 3. 初始化：填充下拉菜单 ---
-        const countrySelect = document.getElementById('countrySelect');
-        // 将数据库里的国家填入菜单
-        for (let code in database) {
-            let option = document.createElement('option');
-            option.value = code;
-            option.innerText = database[code].name;
-            countrySelect.appendChild(option);
+      // 定义商品类别 (用于逻辑判断)
+      const CATEGORIES = ["General Goods (普货)", "Textile/Fashion (纺织鞋包)", "Electronics (电子)", "Cosmetics (化妆品)"];
+
+      // ==========================================
+      // 2. 工具引擎 (Calculation Engine)
+      // ==========================================
+      const METRIC = {
+        formatMoney(amount, currency) {
+          try {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency }).format(amount);
+          } catch {
+            return `${amount} ${currency}`;
+          }
+        },
+        // 简易落地成本计算
+        calculateSampleCost(countryCode, category) {
+          const data = LOGISTICS_DATA[countryCode];
+          if (!data) return null;
+          
+          const sampleValueUSD = 100; // 默认演示金额 100 USD
+          const localRate = data.exchangeRateUSD;
+          const rules = data.taxRules;
+          
+          let duty = 0;
+          let note = "";
+          const isTextile = category.includes("Textile");
+
+          // 简单逻辑映射
+          if (countryCode === "Vietnam") duty = sampleValueUSD * rules.dutyRateGeneral;
+          else if (countryCode === "Malaysia") duty = (sampleValueUSD * localRate > 500) ? sampleValueUSD * rules.dutyRateHigh : 0;
+          else if (countryCode === "Indonesia") duty = sampleValueUSD * (isTextile ? rules.dutyRateTextile : rules.dutyRateGeneral);
+          else duty = sampleValueUSD * rules.dutyRateGeneral; // SA & UAE simplified
+
+          const vatBase = sampleValueUSD + duty;
+          const vat = vatBase * rules.vatRate;
+          const totalTax = duty + vat;
+
+          return {
+            sampleUSD: sampleValueUSD,
+            estimatedTaxUSD: totalTax.toFixed(2),
+            details: isTextile && countryCode === "Indonesia" ? "包含保护性高关税" : "常规税率估算"
+          };
+        }
+      };
+
+      // ==========================================
+      // 3. UI 逻辑 (DOM Manipulation)
+      // ==========================================
+      const els = {
+        country: document.getElementById('countrySelect'),
+        category: document.getElementById('categorySelect'),
+        form: document.getElementById('filterForm'),
+        reset: document.getElementById('resetBtn'),
+        
+        // Output Areas
+        threshold: document.getElementById('thresholdBody'),
+        prohibited: document.getElementById('prohibitedList'),
+        channels: document.getElementById('channelsBody'),
+        pitfall: document.getElementById('pitfallBody'),
+        resultSection: document.getElementById('resultSection'),
+        metaLine: document.getElementById('metaLine')
+      };
+
+      // 初始化年份
+      const yrEl = document.getElementById('year');
+      if(yrEl) yrEl.textContent = new Date().getFullYear();
+
+      // URL & LocalStorage State
+      const params = new URLSearchParams(location.search);
+      const remembered = JSON.parse(localStorage.getItem('GSG_PREF') || '{}');
+
+      function initSelects() {
+        // 填充国家
+        const countryKeys = Object.keys(LOGISTICS_DATA);
+        els.country.innerHTML = countryKeys
+          .map(key => `<option value="${key}">${LOGISTICS_DATA[key].name}</option>`)
+          .join('');
+
+        // 填充类别
+        els.category.innerHTML = CATEGORIES
+          .map(cat => `<option value="${cat}">${cat}</option>`)
+          .join('');
+
+        // 恢复状态
+        const initCountry = params.get('country') || remembered.country || countryKeys[0];
+        const initCategory = params.get('category') || remembered.category || CATEGORIES[0];
+        
+        // 简单的存在性检查
+        if(LOGISTICS_DATA[initCountry]) els.country.value = initCountry;
+        els.category.value = initCategory;
+
+        if(els.metaLine) els.metaLine.textContent = `Data Updated: 2025-11 · Based on latest Customs Policies`;
+      }
+
+      // 渲染：免税门槛
+      function renderThreshold(data) {
+        const { thresholdDesc, note } = data.customs;
+        els.threshold.innerHTML = `
+          <div class="text-slate-800">
+            <div class="font-medium text-lg text-blue-700">${thresholdDesc}</div>
+            <div class="text-sm text-slate-500 mt-1">${note}</div>
+          </div>
+        `;
+      }
+
+      // 渲染：违禁品
+      function renderProhibited(data, currentCategory) {
+        let list = [...data.prohibited];
+        
+        // 如果是特定类别，强调合规性
+        if (currentCategory.includes("Electronics") && data.compliance.includes("SABER")) {
+          list.unshift("⚠️ 必须 SABER 认证 (Strict)");
+        }
+        if (currentCategory.includes("Textile") && data.name.includes("Indonesia")) {
+          list.unshift("⚠️ 极高关税预警 (Safeguard Duty)");
         }
 
-        // --- 4. 核心查询逻辑 ---
-        function searchInfo() {
-            const countryCode = document.getElementById('countrySelect').value;
-            const category = document.getElementById('categorySelect').value;
-            const resultArea = document.getElementById('resultArea');
+        els.prohibited.innerHTML = list.length
+          ? list.map(item => `<li class="mb-1">${item}</li>`).join('')
+          : `<li class="text-slate-400">无特殊违禁标注</li>`;
+      }
 
-            // 如果没选国家，提示并退出
-            if (!countryCode) {
-                alert("请先选择一个目的国家！");
-                return;
-            }
+      // 渲染：物流渠道
+      function renderChannels(data) {
+        els.channels.innerHTML = data.channels
+          ? data.channels.map(c => `<span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2 mb-1">${c}</span>`).join('')
+          : `<span class="text-slate-400">暂无推荐</span>`;
+      }
 
-            const data = database[countryCode];
-            
-            // 拼接警告信息：国家基础警告 + 物品特殊警告
-            let finalWarning = data.baseWarning;
-            if (categoryRules[category]) {
-                finalWarning += `<br><br><span class="text-rose-600 font-bold">${categoryRules[category]}</span>`;
-            }
+      // 渲染：避坑 & 成本模拟
+      function renderPitfall(key, data, currentCategory) {
+        // 组合 COD 痛点 和 合规要求
+        const riskHtml = `
+          <div class="mb-2"><strong>COD/风控：</strong> ${data.codProfile}</div>
+          <div class="mb-2"><strong>合规要求：</strong> ${data.compliance}</div>
+        `;
 
-            // 渲染到页面
-            document.getElementById('taxInfo').innerText = data.threshold;
-            document.getElementById('warningInfo').innerHTML = finalWarning;
-            document.getElementById('shippingInfo').innerHTML = data.recommendation;
+        // 动态计算示例
+        const calc = METRIC.calculateSampleCost(key, currentCategory);
+        const calcHtml = calc ? `
+          <div class="mt-3 pt-3 border-t border-slate-200 text-sm">
+            <span class="badge bg-green-100 text-green-700 px-2 py-1 rounded">成本模拟</span>
+            <div class="mt-2 text-slate-600">
+               若申报 <strong class="text-slate-900">$${calc.sampleUSD}</strong>，预计产生税费: <strong class="text-rose-600">$${calc.estimatedTaxUSD}</strong>
+            </div>
+            <div class="text-xs text-slate-400 mt-1">(${calc.details})</div>
+          </div>
+        ` : '';
 
-            // 显示结果区域
-            resultArea.classList.remove('hidden');
+        els.pitfall.innerHTML = riskHtml + calcHtml;
+      }
+
+      function persistAndSyncURL(countryKey, cat) {
+        localStorage.setItem('GSG_PREF', JSON.stringify({ country: countryKey, category: cat }));
+        const sp = new URLSearchParams(location.search);
+        sp.set('country', countryKey);
+        sp.set('category', cat);
+        history.replaceState(null, '', `${location.pathname}?${sp.toString()}`);
+      }
+
+      function renderAll() {
+        els.resultSection.style.opacity = '0.5'; // Visual feedback
+        
+        const key = els.country.value;
+        const cat = els.category.value;
+        const data = LOGISTICS_DATA[key];
+
+        if (data) {
+          renderThreshold(data);
+          renderProhibited(data, cat);
+          renderChannels(data);
+          renderPitfall(key, data, cat);
+          persistAndSyncURL(key, cat);
         }
 
-        // --- 5. 复制功能 ---
-        function copyResult() {
-            const countryCode = document.getElementById('countrySelect').value;
-            if (!countryCode) return;
+        setTimeout(() => { els.resultSection.style.opacity = '1'; }, 150);
+      }
 
-            const countryName = database[countryCode].name;
-            const threshold = document.getElementById('taxInfo').innerText;
-            const warning = document.getElementById('warningInfo').innerText; // 去掉HTML标签只取文字
-            const strategy = document.getElementById('shippingInfo').innerText;
+      // Event Listeners
+      els.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        renderAll();
+      });
 
-            const text = `【FedEx 物流查询助手】\n📍 目的国：${countryName}\n💰 免税额：${threshold}\n⚠️ 避坑：${warning}\n🚀 建议：${strategy}\n\n(查询结果仅供参考)`;
+      // 即时渲染 (无按钮模式)
+      els.country.addEventListener('change', renderAll);
+      els.category.addEventListener('change', renderAll);
 
-            navigator.clipboard.writeText(text).then(() => {
-                alert("✅ 已复制！去微信粘贴给客户吧。");
-            }).catch(() => {
-                alert("❌ 复制失败，请手动截图。");
-            });
-        }
+      els.reset.addEventListener('click', () => {
+        const keys = Object.keys(LOGISTICS_DATA);
+        els.country.value = keys[0];
+        els.category.selectedIndex = 0;
+        renderAll();
+      });
 
-        // --- 6. 自动读取 URL 参数 (如 ?code=US) ---
-        // 这是让你链接变神奇的关键
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code'); // 获取 ?code=...
-            const cat = urlParams.get('cat');   // 获取 ?cat=...
+      // Init
+      initSelects();
+      renderAll();
 
-            if (code && database[code]) {
-                document.getElementById('countrySelect').value = code;
-                if (cat) {
-                    document.getElementById('categorySelect').value = cat;
-                }
-                searchInfo(); // 自动触发查询
-            }
-        }
+    })();
     </script>
 </body>
 </html>
